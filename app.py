@@ -2,9 +2,11 @@
 import streamlit as st
 from cassandra.cluster import Cluster
 
+
+
 # Connect to Cassandra
-cluster = Cluster([http://localhost:9160/])  # Replace 'your_cassandra_host' with your actual Cassandra host address
-session = cluster.connect(zuhaib)   # Replace 'your_keyspace' with your actual Cassandra keyspace name
+cluster = Cluster(['localhost'], port=9160)  # Replace 'your_cassandra_host' with your actual Cassandra host address
+session = cluster.connect("zuhaib")   # Replace 'your_keyspace' with your actual Cassandra keyspace name
 
 # Streamlit app code
 def main():
