@@ -3,24 +3,29 @@ import streamlit as st
 from cassandra.cluster import Cluster
 
 
+def connect_to_cassandra():
+    cluster = Cluster(['localhost'], port=9042)  # Replace 'localhost' with your Cassandra host address and '9042' with the appropriate port
+    session = cluster.connect('zuhaib')  # Replace 'your_keyspace' with your actual Cassandra keyspace name
+    return session
 
-# Connect to Cassandra
-cluster = Cluster(['localhost'], port=9042)  # Replace 'your_cassandra_host' with your actual Cassandra host address
-session = cluster.connect("zuhaib")   # Replace 'your_keyspace' with your actual Cassandra keyspace name
+def fetch_data(session):
+    query = "SELECT * FROM student;"  # Replace 'your_table' with the actual table name in your keyspace
+    rows = session.execute(query)
+    return rows
 
-# Streamlit app code
+
 def main():
-    st.title('Cassandra Streamlit App')
-    
-    # Define your Streamlit UI elements
-    # For example, you can create a text input to take user input
-    user_input = st.text_input("Enter a value:", "")
+    st.title('Cassandra Connector Streamlit App')
 
-    # Fetch and display data from Cassandra based on user input
-    if user_input:
-        result = session.execute(f"SELECT * FROM your_table WHERE column_name = '{user_input}'")
-        for row in result:
-            st.write(row)
+    # Connect to Cassandra
+    session = connect_to_cassandra()
+
+    # Fetch data from Cassandra
+    data = fetch_data(session)
+
+    # Display the data in the Streamlit app
+    for row in data:
+        st.write(row)
 
 if __name__ == '__main__':
     main()
