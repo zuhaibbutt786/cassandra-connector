@@ -5,7 +5,7 @@ from cassandra.cluster import Cluster
 
 
 # Connect to Cassandra
-cluster = Cluster(['localhost'], port=9160)  # Replace 'your_cassandra_host' with your actual Cassandra host address
+cluster = Cluster(['localhost'], port=9042)  # Replace 'your_cassandra_host' with your actual Cassandra host address
 session = cluster.connect("zuhaib")   # Replace 'your_keyspace' with your actual Cassandra keyspace name
 
 # Streamlit app code
