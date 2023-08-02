@@ -1,1 +1,1 @@
-# cassandra-coonector
+# cassandra-connector
